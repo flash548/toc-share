@@ -1,0 +1,22 @@
+
+## T157 JISCC Status
+
+| Component | Status |
+| --- | --- |
+| NIPR    | UP   |
+| COMMERCIAL INET | UP |
+| UHF | UP |
+| HF  | N/A |
+| VOIP | UP |
+
+
+| Equipment | Status |
+| ---| --- |
+
+
+
+| Fuel | O/H |
+| --- | --- |
+| Diesel | 20 GALS |
+| MOGAS | 10 GALS |
+

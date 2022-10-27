@@ -1,0 +1,49 @@
+#!/usr/bin/env perl
+use Mojolicious::Lite -signatures;
+use Text::MultiMarkdown 'markdown';
+
+get '/' => sub ($c) {
+  
+    if (! -e "file.txt") {
+        $c->render('index', c => "<h2>NOPE</H2>");
+    } else { 
+
+        open (my $file, "<", "file.txt");
+        my $content;
+        $content = <$file>;
+        while (<$file>) {
+            $content .= $_ ;
+        }
+        $content =~ s/\R/\n/g;
+
+        my $text = markdown($content);
+        close $file;
+        $c->render(template => 'index', c => $text);
+    }
+};
+
+app->start;
+__DATA__
+
+@@ index.html.ep
+% layout 'default';
+% title 'Welcome';
+<%== $c %>
+
+@@ layouts/default.html.ep
+<!DOCTYPE html>
+<html>
+  <head><title><%= title %></title>
+    <meta http-equiv="refresh" content=30>
+    <style>
+        table, tr, td { border: 1px solid black; }
+    </style>
+  </head>
+  <body><%= content %>
+
+    <script>
+        var elems = document.getElementsByTagName('td');
+        for (i=0;i<elems.length;i++) { if (elems[i].innerText == 'UP') { elems[i].style.backgroundColor = "lime"; }};
+    </script>
+  </body>
+</html>
